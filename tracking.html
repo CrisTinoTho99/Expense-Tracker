@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracking App</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="tracking.css">
+</head>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<body>
+
+    <div class="header">
+        <h1>Tracking App</h1>
+
+        <div class="header-controls">
+            <div class="dropdown">
+                Daily <i class="fas fa-chevron-down"></i>
+            </div>
+
+            <div class="date-picker">
+                <i class="fas fa-calendar"></i> 16 January 2025
+            </div>
+
+            <div class="export-btn">
+                <i class="fas fa-download"></i> Export
+            </div>
+        </div>
+    </div>
+
+
+    <div class="cards">
+
+   <div class="card">
+    <div class="card-title">
+        <div class="card-heading">💰 Total Expenses</div>
+    </div>
+    <div class="card-value">$1,250</div>
+    <div class="card-note">This month</div>
+</div>
+
+<div class="card">
+    <div class="card-heading">📅 Today</div>
+    <div class="card-value">$75</div>
+    <div class="card-note">3 transactions</div>
+</div>
+
+<div class="card">
+    <div class="card-heading">📊 Category</div>
+    <div class="card-value">Food</div>
+    <div class="card-note">Highest spending</div>
+</div>
+
+
+</div>
+
+
+<div class="chart-card">
+    <div class="chart-title">
+            <div class="card-heading">📊 Daily Expenses</div>
+            <div class="card-btn">
+                <button><i class="fas fa-filter">Filter</i></button>
+                <button onclick="showYearly()">📅 Yearly</button>
+            </div>
+
+    </div>
+    <canvas id="barChart"></canvas>
+    
+</div>
+<table class="transactions-table">
+                <thead>
+                    <tr>
+                        <th>Date <i class="fas fa-sort"></i></th>
+                        <th>Category <i class="fas fa-sort"></i></th>
+                        <th>Amount <i class="fas fa-sort"></i></th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Jan 14, 2025</td>
+                        <td>Subscription</td>
+                        <td>$440.00</td>
+                        <td><span class="status-success">Success</span></td>
+                        <td><button class="action-btn"><i class="fas fa-ellipsis-h"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td>Jan 10, 2025</td>
+                        <td>Transfer</td>
+                        <td>$440.00</td>
+                        <td><span class="status-success">Success</span></td>
+                        <td><button class="action-btn"><i class="fas fa-ellipsis-h"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td>Jan 8, 2025</td>
+                        <td>Transfer</td>
+                        <td>$440.00</td>
+                        <td><span class="status-success">Success</span></td>
+                        <td><button class="action-btn"><i class="fas fa-ellipsis-h"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
+
+<script>
+const ctx = document.getElementById('barChart');
+
+const data = [50, 75, 40, 90, 120, 60, 30];
+const highlightIndex = 1; // Tue (Today)
+
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+        datasets: [{
+            label: 'Expenses',
+            data: data,
+            backgroundColor: data.map((v, i) =>
+                i === highlightIndex ? '#ff6b6b' : '#dcdcdc'
+            )
+        }]
+    },
+    options: {
+        scales: {
+            y: { beginAtZero: true }
+        }
+    }
+});
+
+</script>
+
+
+    
+</body>
+</html>

@@ -1,141 +1,139 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tracking App</title>
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
 
-    <link rel="stylesheet" href="tracking.css">
-</head>
+    <link rel="stylesheet" href="tracking.css" />
+  </head>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-
-<body>
-
+  <body>
     <div class="header">
-        <h1>Tracking App</h1>
+      <h1>Tracking App</h1>
 
-        <div class="header-controls">
-            <div class="dropdown">
-                Daily <i class="fas fa-chevron-down"></i>
-            </div>
+      <div class="header-controls">
+        <div class="dropdown">Daily <i class="fas fa-chevron-down"></i></div>
 
-            <div class="date-picker">
-                <i class="fas fa-calendar"></i> 16 January 2025
-            </div>
-
-            <div class="export-btn">
-                <i class="fas fa-download"></i> Export
-            </div>
+        <div class="date-picker">
+          <i class="fas fa-calendar"></i> 16 January 2025
         </div>
-    </div>
 
+        <div class="export-btn"><i class="fas fa-download"></i> Export</div>
+      </div>
+    </div>
 
     <div class="cards">
+      <div class="card">
+        <div class="card-title">
+          <div class="card-heading">💰 Total Expenses</div>
+        </div>
+        <div class="card-value"></div>
+        <div class="card-note">This month</div>
+      </div>
 
-   <div class="card">
-    <div class="card-title">
-        <div class="card-heading">💰 Total Expenses</div>
+      <div class="card">
+        <div class="card-heading">📅 Total Income</div>
+        <div class="card-value"></div>
+        <div class="card-note">3 transactions</div>
+      </div>
+
+      <div class="card">
+        <div class="card-heading">📊 Balance</div>
+        <div class="card-value"></div>
+        <div class="card-note">Highest spending</div>
+      </div>
     </div>
-    <div class="card-value">$1,250</div>
-    <div class="card-note">This month</div>
-</div>
 
-<div class="card">
-    <div class="card-heading">📅 Today</div>
-    <div class="card-value">$75</div>
-    <div class="card-note">3 transactions</div>
-</div>
-
-<div class="card">
-    <div class="card-heading">📊 Category</div>
-    <div class="card-value">Food</div>
-    <div class="card-note">Highest spending</div>
-</div>
-
-
-</div>
-
-
-<div class="chart-card">
-    <div class="chart-title">
-            <div class="card-heading">📊 Daily Expenses</div>
-            <div class="card-btn">
-                <button><i class="fas fa-filter">Filter</i></button>
-                <button onclick="showYearly()">📅 Yearly</button>
-            </div>
-
+    <div class="chart-card">
+      <div class="chart-title">
+        <div class="card-heading">📊 Daily Expenses</div>
+        <div class="card-btn">
+          <button><i class="fas fa-filter">Filter</i></button>
+          <select id="timeSelect">
+            <option value="week">Tuần</option>
+            <option value="month" selected>Tháng</option>
+            <option value="year">Năm</option>
+          </select>
+        </div>
+      </div>
+      <canvas id="barChart"></canvas>
     </div>
-    <canvas id="barChart"></canvas>
-    
-</div>
-<table class="transactions-table">
-                <thead>
-                    <tr>
-                        <th>Date <i class="fas fa-sort"></i></th>
-                        <th>Category <i class="fas fa-sort"></i></th>
-                        <th>Amount <i class="fas fa-sort"></i></th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Jan 14, 2025</td>
-                        <td>Subscription</td>
-                        <td>$440.00</td>
-                        <td><span class="status-success">Success</span></td>
-                        <td><button class="action-btn"><i class="fas fa-ellipsis-h"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td>Jan 10, 2025</td>
-                        <td>Transfer</td>
-                        <td>$440.00</td>
-                        <td><span class="status-success">Success</span></td>
-                        <td><button class="action-btn"><i class="fas fa-ellipsis-h"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td>Jan 8, 2025</td>
-                        <td>Transfer</td>
-                        <td>$440.00</td>
-                        <td><span class="status-success">Success</span></td>
-                        <td><button class="action-btn"><i class="fas fa-ellipsis-h"></i></button></td>
-                    </tr>
-                </tbody>
-            </table>
 
-<script>
-const ctx = document.getElementById('barChart');
+    <table class="transactions-table">
+      <thead>
+        <tr>
+          <th>Date <i class="fas fa-sort"></i></th>
+          <th>Category <i class="fas fa-sort"></i></th>
+          <th>Amount <i class="fas fa-sort"></i></th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="transactionItems"></tbody>
+    </table>
 
-const data = [50, 75, 40, 90, 120, 60, 30];
-const highlightIndex = 1; // Tue (Today)
+    <div class="button">
+      <button id="button-income"><i class="fas fa-plus"></i></button>
 
-new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
-        datasets: [{
-            label: 'Expenses',
-            data: data,
-            backgroundColor: data.map((v, i) =>
-                i === highlightIndex ? '#ff6b6b' : '#dcdcdc'
-            )
-        }]
-    },
-    options: {
-        scales: {
-            y: { beginAtZero: true }
-        }
-    }
-});
+      <button id="button-expense"><i class="fas fa-minus"></i></button>
+    </div>
 
-</script>
+    <div class="form-income" id="formIncome">
+      <h3>Add Income</h3>
+      <label for="Amount">Amount</label>
+      <input class="amount" type="number" placeholder="Amount" />
+      <label for="Category">Category</label>
+      <select class="category" name="category" id="category">
+        <option value="salary">Salary</option>
+        <option value="business">Business</option>
+        <option value="investment">Investment</option>
+        <option value="gift">Gift</option>
+        <option value="other">Other</option>
+      </select>
+      <label for="">Description</label>
+      <input class="description" type="text" placeholder="Description" />
+      <label for="">Date</label>
+      <input class="date" type="date" placeholder="Date" />
 
+      <div class="form-actions">
+        <button id="closeFormBtn">Cancel</button>
+        <button class="income-btn">Save</button>
+      </div>
+    </div>
 
-    
-</body>
+    <div class="form-expense" id="formExpense">
+      <h3>Add Expense</h3>
+      <label for="Amount">Amount</label>
+      <input type="number" placeholder="Amount" />
+      <label for="Category">Category</label>
+      <select name="category" id="category">
+        <option value="food">Food</option>
+        <option value="transportation">Transportation</option>
+        <option value="entertainment">Entertainment</option>
+        <option value="bills">Bills</option>
+        <option value="other">Other</option>
+      </select>
+      <label for="">Description</label>
+      <input type="text" placeholder="Description" />
+      <label for="">Date</label>
+      <input type="date" placeholder="Date" />
+
+      <div class="form-actions">
+        <button id="closeFormBtn">Cancel</button>
+        <button class="expense-btn">Save</button>
+      </div>
+    </div>
+
+    <div></div>
+  </body>
 </html>
+<script src="project/controller.js"></script>

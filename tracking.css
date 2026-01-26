@@ -1,79 +1,75 @@
-*{
-    margin: 0;
-    padding: 0;
- 
+* {
+  margin: 0;
+  padding: 0;
 }
-body{
-    background-color: #f3f4f6;
+body {
+  background-color: #f3f4f6;
 }
-.header{
-   padding: 20px 32px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.header {
+  padding: 20px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    background-color: #ffffff;
-    border-bottom: 1px solid #e5e7eb;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
 
-    font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif;
 }
-.header-controls{
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
+.header-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
 }
 .dropdown,
 .date-picker,
 .export-btn {
- 
+  padding: 8px 14px;
+  border-radius: 8px;
 
-    padding: 8px 14px;
-    border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
 
-    font-size: 14px;
-    font-weight: 500;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  color: #374151;
 
-    background-color: #f9fafb;
-    border: 1px solid #e5e7eb;
-    color: #374151;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px 32px;
+}
+.card {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
 
-    cursor: pointer;
-    transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
-.cards{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px 32px;
+.card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 10px;
 }
-.card{
-    background-color: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    padding: 20px;
-    
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+.card-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
 }
-.card-title{
-    font-size: 16px;
-    font-weight: 600;
-    color: #111827;
-    margin-bottom: 10px;
+.card-note {
+  font-size: 14px;
+  font-weight: 500;
+  color: #10b981;
+  margin-top: 8px;
 }
-.card-value{
-    font-size: 24px;
-    font-weight: 700;
-    color: #111827;
-}
-.card-note{
-    font-size: 14px;
-    font-weight: 500;
-    color: #10b981; 
-    margin-top: 8px;
-}
-
 
 .chart {
   display: flex;
@@ -94,52 +90,122 @@ body{
   border-radius: 6px 6px 0 0;
 }
 .chart-card {
-    width: 30%;
-    height: 400px;
-    background-color: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    padding: 50px;
-    margin: 20px 32px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    
+  width: 30%;
+  height: 400px;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 50px;
+  margin: 20px 32px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 .chart-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    padding: 20px;
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 20px;
 }
 .card-btn button {
-    background-color: #4c7aaf;
-    color: white;
-    border: none;
-    padding: 8px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-   
+  background-color: #4c7aaf;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
 }
 .transactions-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-            font-family: Arial, sans-serif;
-            background-color: aliceblue;
-        }
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-family: Arial, sans-serif;
+  background-color: aliceblue;
+}
+.transactions-table :hover {
+  background-color: #f9fafb;
+}
+.transactions-table th {
+  text-align: left;
+  padding: 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #6b7280;
+  border-bottom: 1px solid #e5e7eb;
+}
 
-        .transactions-table th {
-            text-align: left;
-            padding: 1rem;
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: #6b7280;
-            border-bottom: 1px solid #e5e7eb;
-        }
+.transactions-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #f3f4f6;
+}
 
-        .transactions-table td {
-            padding: 1rem;
-            border-bottom: 1px solid #f3f4f6;
-        }
+@media only screen and (max-width: 600px) {
+  .chart-card {
+    width: 90%;
+    margin-left: 0px;
+  }
+  .header {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .transactions-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-left: 40px;
+    font-family: Arial, sans-serif;
+    background-color: aliceblue;
+  }
+}
+
+.button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.fas {
+  font-size: 30px;
+  color: white;
+}
+.button-income {
+  background-color: #10b981;
+  border: none;
+  padding: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.button-expense {
+  background-color: #ef4444;
+  border: none;
+  padding: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-income,
+.form-expense {
+  background-color: #ffffff;
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+}
+
+.form-income.active,
+.form-expense.active {
+  display: block;
+  transform: translate(-50%, -50%) scale(1);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: translate(-50%, -50%) scale(0.8);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}

@@ -4,7 +4,7 @@ const mysql = require("mysql2/promise");
 const app = express();
 
 let connection;
-async function main() {
+export async function main() {
   try {
     connection = await mysql.createConnection({
       host: "localhost",
@@ -15,16 +15,17 @@ async function main() {
     });
 
     console.log("Connected to MySQL Server!");
-
-    app.get("/transactions", async (req, res) => {
-      try {
-        const [rows] = await connection.query("SELECT * FROM transactions");
-        console.log("The data from transactions table are:\n", rows);
-        res.json(rows);
-      } catch (error) {
-        res.status(500).json({ error: error.message });
-      }
-    });
+    await function getTransactions() {
+      app.get("/transactions", async (req, res) => {
+        try {
+          const [rows] = await connection.query("SELECT * FROM transactions");
+          console.log("The data from transactions table are:\n", rows);
+          res.json(rows);
+        } catch (error) {
+          res.status(500).json({ error: error.message });
+        }
+      });
+    };
     app.get("/categories", async (req, res) => {
       try {
         const [rows] = await connection.query("SELECT * FROM categories");
@@ -155,5 +156,4 @@ async function main() {
   }
 }
 
-main();
 // so we must use await because mysql2  function createconection returns function promise
